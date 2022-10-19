@@ -16,12 +16,13 @@ Park.prototype.findDinosaurWithMostVisitors = function () {
   mostVisitors = [];
   for (let dinosaur of this.dinosaurs) {
     mostVisitors.push(dinosaur.guestsAttractedPerDay);
+    highest = Math.max(...mostVisitors);
+    if (highest === dinosaur.guestsAttractedPerDay) {
+      return dinosaur;
+    }
   }
-  return mostVisitors;
 };
 
-//Pass in the species which will be T-rex
-//How do I find T-rex in the list of dinosaurs
 Park.prototype.findDinosaurBySpecies = function (species) {
   foundDinosaur = [];
   for (let dinosaur of this.dinosaurs) {
@@ -50,6 +51,13 @@ Park.prototype.calculateTotalRevenueForYear = function () {
   guestsPerYear = this.calculateVisitorPerYear();
   totalRevenue = guestsPerYear * this.ticketPrice;
   return totalRevenue;
+};
+
+//I don't think this is the correct solution, this only finds the dinosaur you want to remove.
+//How do you remove the dinosaur without affecting the indexes of the others?
+Park.prototype.removeDinosaurBySpecies = function (species) {
+  dinosaurToRemove = this.findDinosaurBySpecies(species);
+  return dinosaurToRemove;
 };
 
 module.exports = Park;
